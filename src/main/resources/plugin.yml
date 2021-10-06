@@ -68,3 +68,7 @@ commands:
   team:
     description: "Used to manage teams."
     usage: /<command> <sub-command>
+  forceteam:
+    description: "Force-move a player to another team."
+    usage: /<command> <player> <team leader>
+    permission: "uhc-core.commands.forceteam"

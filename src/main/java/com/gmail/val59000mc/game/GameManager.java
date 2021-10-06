@@ -394,6 +394,7 @@ public class GameManager{
 		registerCommand("upload", new UploadCommandExecutor());
 		registerCommand("deathmatch", new DeathmatchCommandExecutor(this, deathmatchHandler));
 		registerCommand("team", new TeamCommandExecutor(this));
+		registerCommand("forceteam", new ForceTeamCommandExecutor(this));
 	}
 
 	private void registerCommand(String commandName, CommandExecutor executor){
