@@ -1,14 +1,19 @@
 package com.gmail.val59000mc.scenarios.scenariolisteners;
 
+import com.gmail.val59000mc.UhcCore;
 import com.gmail.val59000mc.scenarios.Option;
 import com.gmail.val59000mc.customitems.CraftsManager;
 import com.gmail.val59000mc.scenarios.ScenarioListener;
 import com.gmail.val59000mc.utils.UniversalMaterial;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class HasteyBoysListener extends ScenarioListener{
 
@@ -45,12 +50,27 @@ public class HasteyBoysListener extends ScenarioListener{
         }
 
         try {
-            item.addEnchantment(Enchantment.DIG_SPEED,efficiency);
-            item.addEnchantment(Enchantment.DURABILITY,durability);
-        }catch (IllegalArgumentException ex){
-            // Nothing
-        }
+            // Add enchant to crafted item
+            addEnchant(item);
 
+            if(e.isShiftClick()) {  // If shift-click crafted, add enchant to any other produced tools
+                Bukkit.getScheduler().scheduleSyncDelayedTask(UhcCore.getPlugin(), () -> {
+                    ItemStack[] contents = e.getWhoClicked().getInventory().getContents();
+                    for (ItemStack invItem : contents) {
+                        try { addEnchant(invItem);
+                        } catch (IllegalArgumentException ignored) {}
+                    }
+                });
+            }
+        } catch (IllegalArgumentException ignored) {}
+    }
+
+    public void addEnchant(ItemStack item) {
+        // Add enchant to item if tool and has no existing enchantment
+        if (item != null && EnchantmentTarget.TOOL.includes(item.getType()) && item.getEnchantments().isEmpty()) {
+            item.addEnchantment(Enchantment.DIG_SPEED, efficiency);
+            item.addEnchantment(Enchantment.DURABILITY, durability);
+        }
     }
 
 }
