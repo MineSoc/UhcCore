@@ -5,6 +5,11 @@ Automates UHC games on a dedicated 1.8 - 1.17 server.
 
 More info can be found on the [wiki](https://github.com/Mezy/UhcCore/wiki)
 
+Forked to add:
+- Team randomizer command
+- Force change team command
+- Fix to Hastey Boys to enchant shift-click crafted of tools as well
+
 ## Building
 For building use `./gradlew build` on Mac and Linux or `gradlew.bat build` on Windows.
 
