@@ -72,3 +72,7 @@ commands:
     description: "Force-move a player to another team."
     usage: /<command> <player> <team leader>
     permission: "uhc-core.commands.forceteam"
+  randomteams:
+    description: "Randomize team members."
+    usage: /<command> <team count>
+    permission: "uhc-core.commands.randomteams"
